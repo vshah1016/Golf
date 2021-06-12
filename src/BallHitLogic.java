@@ -17,7 +17,7 @@ public class BallHitLogic {
                     int newX = diffY * changeX;
                     int[] arr = new int[2];
                     arr[0] = newX;
-                    arr[1] = newY;
+                    arr[1] = -1*newY;
                     return arr;
 
                 }
