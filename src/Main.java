@@ -1,17 +1,17 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
-    static int[][] golfData = new int[1920][1080];
-
-    public static void main(String[] args) {
-        GolfCourse golfCourse = new GolfCourse();
-        JFrame jFrame = new JFrame();
-        jFrame.add(golfCourse.frame);
+    static JFrame jFrame = new JFrame();
+    public static void main(String[] args) throws InterruptedException {
+        GolfBall golfBall = new GolfBall(new Point(960, 900));
+        GolfFrame golfCourse = new GolfFrame(golfBall);
+        jFrame.getContentPane().setBackground(Color.green);
+        jFrame.add(golfCourse);
         jFrame.pack();
         jFrame.setSize(1920, 1080);
         jFrame.setVisible(true);
-
-        JButton mo_lord = golfCourse.getMo_lord();
-
+        Thread.sleep(1000);
+        golfBall.move(new Point(300, 300));
     }
 }
