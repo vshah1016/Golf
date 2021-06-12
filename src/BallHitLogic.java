@@ -2,6 +2,19 @@ public class BallHitLogic {
     
       public int[] bounceCheck(int vert, int hor) //This is the important method here
       {
+          int newX;
+          int newY;
+         //x and y are current coordinates of ball
+         if(x < 25 || x > 1895)
+         {
+            newX = -1*hor;
+            newY = vert;
+         }
+         if(y < 25 || y > 1895)
+         {
+            newX = hor;
+            newY = -1*vert;
+         }
          for(int i = 0; i < obstacles.size(); i++)
          {
             int [][] points = hitting();
@@ -26,16 +39,17 @@ public class BallHitLogic {
                   int diffY = changeX*vert;
                   int diffX = changeY*hor;
 
-                  int newY = diffX*y;
-                  int newX = diffY*x;
+                  newY = diffX*y;
+                  newX = diffY*x;
                }
-               int [] arr = new int[2];
-               arr[0] = newX;
-               arr[1] = -newY;
-               return arr;
+               break;
 
             }
          }
+         int [] arr = new int[2];
+         arr[0] = newX;
+         arr[1] = -newY;
+         return arr;
 
       }
 }
