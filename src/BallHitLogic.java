@@ -46,9 +46,10 @@ public class BallHitLogic {
 
             }
          }
-         int [] arr = new int[2];
+         int [] arr = new int[3]; //First 2 are for slope, third is for b(y-int) to generate line
          arr[0] = newX;
          arr[1] = -newY;
+         arr[2] = y;
          return arr;
 
       }
