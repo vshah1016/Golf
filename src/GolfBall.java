@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class GolfBall {
-    private Locations locations;
+    private final Locations locations;
     private final int SIZE = 25;
 
     public GolfBall(int x, int y) {
@@ -14,17 +14,25 @@ public class GolfBall {
     }
 
     public void move(int x, int y, Graphics g){
-        Point currentLocation, newLocation;
+        Point currentLocation, newLocation, midPoint;
         currentLocation = locations.currentLocation();
         newLocation = new Point(x, y);
-
+        midPoint = Point.midPoint(currentLocation, newLocation);
         locations.newLocations(newLocation);
-        reDraw(g);
-        //TODO: move ball
+        reDraw(g, midPoint);
+        reDraw(g, newLocation);
     }
 
-    private void reDraw(Graphics g){
+    private void reDraw(Graphics g, Point point){
         //TODO: redraw the ball
+    }
+
+    public Point centerPoint(Point point){
+        return new Point(point.x + (SIZE / 2), point.y +  (SIZE / 2));
+    }
+    public Point centerPoint(){
+        Point point = locations.currentLocation();
+        return new Point(point.x + (SIZE / 2), point.y +  (SIZE / 2));
     }
 
 

@@ -9,7 +9,6 @@ public class GoatFrame extends Component {
 
     public void paint(Graphics g) {
         super.paint(g);
-
 //        for (int i = 0; i < Main.golfData.length; i++) {
 //            for (int j = 0; j < Main.golfData[0].length; j++) {
 //                Main.golfData[i][j] = (int) (Math.random() * 3) + 1;
