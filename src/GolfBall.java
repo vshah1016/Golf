@@ -28,11 +28,11 @@ public class GolfBall {
     }
 
     public Point centerPoint(Point point){
-        return new Point(point.x + (SIZE / 2), point.y +  (SIZE / 2));
+        return new Point(point.x + (SIZE / 2), point.y -  (SIZE / 2));
     }
     public Point centerPoint(){
         Point point = locations.currentLocation();
-        return new Point(point.x + (SIZE / 2), point.y +  (SIZE / 2));
+        return centerPoint(point);
     }
 
 
