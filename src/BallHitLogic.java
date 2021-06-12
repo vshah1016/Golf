@@ -13,8 +13,8 @@ public class BallHitLogic {
                     int diffY = changeX * vert;
                     int diffX = changeY * hor;
 
-                    int newY = diffX * y;
-                    int newX = diffY * x;
+                    int newY = diffX * changeY;
+                    int newX = diffY * changeX;
                     int[] arr = new int[2];
                     arr[0] = newX;
                     arr[1] = newY;
