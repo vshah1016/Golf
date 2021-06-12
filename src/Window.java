@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GolfCourse{
+public class Window {
     public JPanel frame;
 
-    public GolfCourse(){
+    public Window(){
         frame.setSize(1920, 1080);
         frame.setVisible(true);
     }
