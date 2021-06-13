@@ -13,6 +13,10 @@ public class GolfFrame extends Component {
     public void paint(Graphics g) {
         super.paint(g);
         golfBall.draw(g);
+        Shape hole = obstacles[0];
+        g.setColor(Color.black);
+        g.fillOval((int)hole.center[0], (int)hole.center[1], (int)hole.radius * 2, (int)hole.radius * 2);
+//        g.drawPolygon();
 /*
         for (int i = 0; i < Main.golfData.length; i++) {
             for (int j = 0; j < Main.golfData[0].length; j++) {

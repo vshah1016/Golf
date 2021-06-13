@@ -32,11 +32,11 @@ public class GolfBall {
         double b = currentLocation.y - (m * currentLocation.x);
         ArrayList<Point> points = new ArrayList<>();
         double d1 = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
-        int v = 10;
+        int v = 30;
         int vi = v;
         for(int i = 0; v > 0; i++){
             double d = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
-            int x3 = (int) Math.ceil((currentLocation.x - ((v * (currentLocation.x - newLocation.x)) / d)));
+            int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
             int y3 = (int) Math.ceil((m * x3 + b));
             Point point3 = new Point(x3, y3);
             points.add(point3);
