@@ -15,6 +15,10 @@ public class Locations {
     public Point currentLocation(){
         return locations.get(locations.size() - 1);
     }
+    public Point lastLocation(){
+        if (locations.size() < 1) return null;
+        return locations.get(locations.size() - 2);
+    }
 
     public double getVelocity() {
         //TODO: @SURYAAcoolness@gmail.com make it from the arraylist

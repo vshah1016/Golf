@@ -1,65 +1,46 @@
 public class Bounce {
-    public static int[] bounceCheck(int vert, int hor) //This is the important method here
-    {
+    public int[] bounceCheck(int lilUzi, int horizontal) {
         Point ballPosition = GolfBall.locations.currentLocation();
-        for (int i = 0; i < Main.obstacles.length; i++) {
-            int[][] points = CourseGen.isTouching();
-            if (points[0][0] != -1) {
-                int changeY = (points[1][1] - points[0][1]);
-                int changeX = (points[1][0] - points[0][0]);
-                //Slope of final trajectory = wallSlope/(initialDirection/wallSlope);
-
-                int diffY = changeX * vert;
-                int diffX = changeY * hor;
-
-                int newY = diffX * ballPosition.y;
-                int newX = diffY * ballPosition.x;
-                int[] arr = new int[2];
-                arr[0] = newX;
-                arr[1] = newY;
-                return arr;
-
-            }
-        }
-
-    }
-    public int[] bounceCheck(int vert, int hor) //This is the important method here
-    {
-      for(int i = 0; i < obstacles.size(); i++)
-      {
-         int [][] points = hitting();
-         if(points[0][0] != -1) 
-         {
+        double[] coords = new double[]{ballPosition.x, ballPosition.y};
+         double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
+         int[][] points = new int[][]{
+                 new int[]{
+                         (int) isTouching[0], (int) isTouching[1]
+                 },
+                 new int[]{
+                         (int) isTouching[2], (int) isTouching[3]
+                 }
+         };
+         if(points[0][0] != -1) {
             int changeY = (points[1][1] - points[0][1]);
-            int changeX = (points[1][0]-points[0][0]); 
-            if(changeX == 0)
-            {
-               newX = - 1* hor;
-               newY = vert;
+            int changeX = (points[1][0]-points[0][0]);
+            int newX, newY;
+            if(changeX == 0) {
+               newX = - 1* horizontal;
+               newY = lilUzi;
             }
-            else if(changeY == 0)
-            {
-               newX = hor;
-               newY = -1*vert;
+            else if(changeY == 0) {
+               newX = horizontal;
+               newY = -1*lilUzi;
             }
-            else
-            {
+            else {
                //Slope of final trajectory = wallSlope/(initialDirection/wallSlope);
    
-               int diffY = changeX*vert;
-               int diffX = changeY*hor;
+               int diffY = changeX*lilUzi;
+               int diffX = changeY*horizontal;
          
-               int newY = diffX*y;
-               int newX = diffY*x;
+               newY = diffX* ballPosition.y;
+               newX = diffY* ballPosition.x;
             }
-            int [] arr = new int[2];
+            int[] arr = new int[2];
             arr[0] = newX;
             arr[1] = -newY;
+            arr[2] = ballPosition.y;
             return arr;
-         
          }
-      }
-
+         return new int[]{
+                 horizontal, lilUzi, ballPosition.y
+         };
    }
 
     public double[] isTouching(Shape currCircle, Shape[] Obstacles) {
