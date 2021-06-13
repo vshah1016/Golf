@@ -27,7 +27,7 @@ public class CourseGen {
                 else
                 {
                     rLength = rand.nextInt(200 - 50 + 1) + 250;
-                    rWidth = rand.nextInt(200 - 50 + 1) + 50;
+                    rWidth = rand.nextInt(200 - 50 + 1) + 80;
                 }
                 int rXVal = rand.nextInt(1910 - 10 + 1) + 10;
                 int rYVal = rand.nextInt(1070 - 10 + 1) + 10;
