@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class courseGen {
+public class CourseGen {
     Random rand = new Random();
     public Shape genHole(){
         //preset to not hit wall by subtracting 25 from 1920 and 1080 and starting at 25
