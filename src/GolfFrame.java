@@ -2,8 +2,10 @@ import java.awt.*;
 
 public class GolfFrame extends Component {
     final GolfBall golfBall;
-    public GolfFrame(GolfBall golfBall) {
+    final Shape[] obstacles;
+    public GolfFrame(GolfBall golfBall, Shape[] obstacles) {
         this.golfBall = golfBall;
+        this.obstacles = obstacles;
         setSize(new Dimension(1920, 1080));
         setVisible(true);
     }

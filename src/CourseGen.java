@@ -1,15 +1,15 @@
 import java.util.Random;
 
 public class CourseGen {
-    Random rand = new Random();
-    public Shape genHole(){
+    static Random rand = new Random();
+    static public Shape genHole(){
         //preset to not hit wall by subtracting 25 from 1920 and 1080 and starting at 25
         int rXval = rand.nextInt(1885 - 25 + 1) + 25;
         int rYval = rand.nextInt(1055 - 25 + 1) + 25;
         Shape shape = new Shape(new double[][]{},new double[]{rXval,rYval},25,true);
         return shape;
     }
-    public Shape[] genObstacle(){
+    public static Shape[] genObstacle(){
         double[][] coors;
         while(true){
             coors = new double[2][2];
@@ -32,7 +32,7 @@ public class CourseGen {
         }
     }
     //use overlap to check if wall, obstacle, and hole are touching but also repurpose to check if ball in hole
-    public boolean overlap(Shape hole, Shape[] obsCoors){
+    static public boolean overlap(Shape hole, Shape[] obsCoors){
         double[] center = hole.center;
         double radius = hole.radius;
         for(Shape obs: obsCoors) {
