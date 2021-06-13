@@ -10,9 +10,9 @@ public class CourseGen {
         return shape;
     }
     public static Shape[] genObstacle(){
-        double[][] coors;
-        while(true){
 
+        while(true){
+            double[][] coors;
             //TODO factor angle
             Shape[] obsCoors = new Shape[6];
             for(int i=0; i<6; i++){
@@ -49,6 +49,7 @@ public class CourseGen {
                 return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2],obsCoors[3], obsCoors[4], obsCoors[5]};
 
             }
+            System.out.println("hi");
         }
     }
     static public boolean drootOverlap(Shape hole, Shape [] obsCoors)
@@ -73,6 +74,7 @@ public class CourseGen {
             if (coors[1][0] >= 1920 || coors[1][1] >= 1080) {
                 return true;
             }
+            if(coors[0][0]<center[0]+30&&coors[1][0]>center[0]-30&&coors[0][1]<center[1]+30&&coors[1][1]>center[1]-30){return true;}
             for (int i = (int) coors[0][1]; i < coors[1][1]; i++) {
                 if (Math.pow((coors[0][0] - center[0]), 2) + Math.pow((i - center[1]), 2) == Math.pow(radius, 2)) {
                     return true;
