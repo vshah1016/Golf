@@ -4,8 +4,8 @@ public class CourseGen {
     static Random rand = new Random();
     static public Shape genHole(){
         //preset to not hit wall by subtracting 25 from 1920 and 1080 and starting at 25
-        int rXval = rand.nextInt(1885 - 900 + 1) + 900;
-        int rYval = rand.nextInt(500 - 25 + 1) + 25;
+        int rXval = rand.nextInt(1885 - 1100 + 1) + 1100;
+        int rYval = rand.nextInt(400 - 25 + 1) + 25;
         Shape shape = new Shape(new double[][]{},new double[]{rXval,rYval},25,true);
         return shape;
     }
