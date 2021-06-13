@@ -19,7 +19,7 @@ public class CourseGen {
                 coors = new double[2][2];
                 int rLength;
                 int rWidth;
-                if(i == 0)
+                if(i == 0 || i == 1|| i==2)
                 {
                     rLength = rand.nextInt(200 - 50 + 1) + 50;
                     rWidth = rand.nextInt(200 - 50 + 1) + 250;
