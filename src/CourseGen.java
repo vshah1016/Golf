@@ -14,8 +14,8 @@ public class CourseGen {
         while(true){
 
             //TODO factor angle
-            Shape[] obsCoors = new Shape[3];
-            for(int i=0; i<3; i++){
+            Shape[] obsCoors = new Shape[6];
+            for(int i=0; i<6; i++){
                 coors = new double[2][2];
                 int rLength;
                 int rWidth;
@@ -43,7 +43,10 @@ public class CourseGen {
                 System.out.println(obsCoors[0].coors[0][0]);
                 System.out.println(obsCoors[1].coors[0][0]);
                 System.out.println(obsCoors[2].coors[0][0]);
-                return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2]};
+                System.out.println(obsCoors[3].coors[0][0]);
+                System.out.println(obsCoors[4].coors[0][0]);
+                System.out.println(obsCoors[5].coors[0][0]);
+                return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2],obsCoors[3], obsCoors[4], obsCoors[5]};
 
             }
         }
@@ -85,7 +88,7 @@ public class CourseGen {
             if((925>coors[1][1]&&875<coors[1][1])&&(935<coors[1][0]&&985>coors[1][0])){return true;}
             if((925>coors[0][1]&&875<coors[0][1])&&(935<coors[1][0]&&985>coors[1][0])){return true;}
         }
-        for(int i=0; i<3;i++){
+        for(int i=0; i<6;i++){
             double[][] compare1 = obsCoors[i].coors;
             double[][] compare2;
             try{compare2 = obsCoors[i+1].coors;}
