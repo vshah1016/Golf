@@ -3,16 +3,14 @@ import java.util.ArrayList;
 
 public class GolfBall {
     public static final int SIZE = 25;
-    private final Locations locations;
+    public static final Locations locations = new Locations(new Point(800, 300));
     private final Shape[] obstacles;
 
     public GolfBall(Point starting, Shape[] obstacles) {
-        locations = new Locations(new Point(starting.x, starting.y));
         this.obstacles = obstacles;
     }
 
-    public GolfBall(Locations locations, Shape[] obstacles) {
-        this.locations = locations;
+    public GolfBall(Shape[] obstacles) {
         this.obstacles = obstacles;
     }
 
@@ -22,7 +20,7 @@ public class GolfBall {
         g.fillOval(currentLocation.x, currentLocation.y, SIZE, SIZE);
     }
 
-    public void move(Point newLocation) throws InterruptedException {
+    public void move(Point newLocation, int speed) throws InterruptedException {
         //TODO CHECK BOUNCE WITHIN POINT
         Point currentLocation, initialPoint;
         currentLocation = locations.currentLocation();
@@ -32,7 +30,7 @@ public class GolfBall {
         double b = currentLocation.y - (m * currentLocation.x);
         ArrayList<Point> points = new ArrayList<>();
         double d1 = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
-        int v = 30;
+        int v = speed;
         int vi = v;
         for(int i = 0; v > 0; i++){
             double d = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
@@ -43,13 +41,13 @@ public class GolfBall {
             currentLocation = point3;
             double d2 = Math.sqrt(Math.pow(initialPoint.x - currentLocation.x, 2) + Math.pow(initialPoint.y - currentLocation.y, 2));
             v = (int) ((vi * (d / d1)));
-            if (v == 0) v = 1;
-            if ((int) d < 5) v = 0;
+            if (v == 1 || v == 0) v = 2;
+            if ((int) d < 2) v = 0;
         }
         points.add(newLocation);
         for (Point point : points) {
             locations.newLocations(point);
-            GolfFrame golfFrame = new GolfFrame(new GolfBall(locations, obstacles), obstacles);
+            GolfFrame golfFrame = new GolfFrame(new GolfBall(obstacles), obstacles);
             Main.jFrame.add(golfFrame);
             Thread.sleep(10);
             Main.jFrame.validate();
