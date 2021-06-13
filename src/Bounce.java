@@ -38,9 +38,7 @@ public class Bounce {
             arr[2] = ballPosition.y;
             return arr;
          }
-         return new int[]{
-                 horizontal, lilUzi, ballPosition.y
-         };
+         return new int[]{-1};
    }
 
     public double[] isTouching(Shape currCircle, Shape[] Obstacles) {

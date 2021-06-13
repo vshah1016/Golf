@@ -3,12 +3,8 @@ import java.util.ArrayList;
 
 public class GolfBall {
     public static final int SIZE = 25;
-    public static final Locations locations = new Locations(new Point(800, 300));
+    public static final Locations locations = new Locations(new Point(80, 900));
     private final Shape[] obstacles;
-
-    public GolfBall(Point starting, Shape[] obstacles) {
-        this.obstacles = obstacles;
-    }
 
     public GolfBall(Shape[] obstacles) {
         this.obstacles = obstacles;

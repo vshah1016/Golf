@@ -5,7 +5,7 @@ public class Main {
     static JFrame jFrame = new JFrame();
     static Shape[] obstacles = CourseGen.genObstacle();
     public static void main(String[] args) throws InterruptedException {
-        GolfBall golfBall = new GolfBall(new Point(80, 900), obstacles);
+        GolfBall golfBall = new GolfBall(obstacles);
         GolfFrame golfCourse = new GolfFrame(golfBall, obstacles);
         jFrame.getContentPane().setBackground(new Color(31, 163, 71));
         jFrame.add(golfCourse);
