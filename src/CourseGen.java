@@ -12,10 +12,11 @@ public class CourseGen {
     public static Shape[] genObstacle(){
         double[][] coors;
         while(true){
-            coors = new double[2][2];
+
             //TODO factor angle
             Shape[] obsCoors = new Shape[3];
             for(int i=0; i<3; i++){
+                coors = new double[2][2];
                 int rLength = rand.nextInt(200 - 50 + 1) + 50;
                 int rWidth = rand.nextInt(200 - 50 + 1) + 50;
                 int rXVal = rand.nextInt(1910 - 10 + 1) + 10;
@@ -28,7 +29,13 @@ public class CourseGen {
                 obsCoors[i]=obs;
             }
             Shape circle = genHole();
-            if(!overlap(circle,obsCoors)){return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2]};}
+            if(!overlap(circle,obsCoors)){
+                System.out.println(obsCoors[0].coors[0][0]);
+                System.out.println(obsCoors[1].coors[0][0]);
+                System.out.println(obsCoors[2].coors[0][0]);
+                return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2]};
+
+            }
         }
     }
     //use overlap to check if wall, obstacle, and hole are touching but also repurpose to check if ball in hole
