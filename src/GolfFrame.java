@@ -16,6 +16,12 @@ public class GolfFrame extends Component {
         Shape hole = obstacles[0];
         g.setColor(Color.black);
         g.fillOval((int)hole.center[0], (int)hole.center[1], (int)hole.radius * 2, (int)hole.radius * 2);
+        g.setColor(Color.red);
+        for (int i = 1; i < obstacles.length; i++) {
+            int[] xCoords = {(int) obstacles[i].coors[0][0], (int) obstacles[i].coors[0][0], (int) obstacles[i].coors[1][0], (int) obstacles[i].coors[1][0]};
+            int[] yCoords = {(int) obstacles[i].coors[0][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[0][1]};
+            g.fillPolygon(xCoords, yCoords, 4);
+        }
 //        g.drawPolygon();
 /*
         for (int i = 0; i < Main.golfData.length; i++) {
