@@ -68,6 +68,16 @@ public class courseGen {
             if((925>coors[1][1]&&875<coors[1][1])&&(935<coors[1][0]&&985>coors[1][0])){return true;}
             if((925>coors[0][1]&&875<coors[0][1])&&(935<coors[1][0]&&985>coors[1][0])){return true;}
         }
+        for(int i=0; i<3;i++){
+            double[][] compare1 = obsCoors[i].coors;
+            double[][] compare2;
+            try{compare2 = obsCoors[i+1].coors;}
+            catch(Exception e){compare2 = obsCoors[0].coors;}
+            if((compare2[1][1]>compare1[1][1]&&compare2[0][1]<compare1[1][1])&&(compare2[0][0]<compare1[0][0]&&compare2[0][1]>compare1[0][0])){return true;}
+            if((compare2[1][1]>compare1[0][1]&&compare2[0][1]<compare1[0][1])&&(compare2[0][0]<compare1[0][0]&&compare2[0][1]>compare1[0][0])){return true;}
+            if((compare2[1][1]>compare1[1][1]&&compare2[0][1]<compare1[1][1])&&(compare2[0][0]<compare1[1][0]&&compare2[0][1]>compare1[1][0])){return true;}
+            if((compare2[1][1]>compare1[0][1]&&compare2[0][1]<compare1[0][1])&&(compare2[0][0]<compare1[1][0]&&compare2[0][1]>compare1[1][0])){return true;}
+        }
 
 
 
