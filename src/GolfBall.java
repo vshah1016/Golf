@@ -16,11 +16,11 @@ public class GolfBall {
         g.fillOval(currentLocation.x, currentLocation.y, SIZE, SIZE);
     }
 
-    public void move(Point newLocation, int speed) throws InterruptedException {
+    public void move(Point newLocation, int speed, int power) throws InterruptedException {
         //TODO CHECK BOUNCE WITHIN POINT
         int[] bounceLine = Bounce.bounceCheck(newLocation.y, newLocation.x);
         boolean bounce = bounceLine[0] == -1;
-        if (bounce){
+        if (bounce){ // 0 lR; 1TB
 
         }
         Point currentLocation, initialPoint;
