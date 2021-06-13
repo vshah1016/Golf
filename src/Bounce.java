@@ -1,5 +1,5 @@
 public class Bounce {
-    public int[] bounceCheck(int lilUzi, int horizontal) {
+    public static int[] bounceCheck(int lilUzi, int horizontal) {
         Point ballPosition = GolfBall.locations.currentLocation();
         double[] coords = new double[]{ballPosition.x, ballPosition.y};
          double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
@@ -34,14 +34,14 @@ public class Bounce {
             }
             int[] arr = new int[3];
             arr[0] = newX;
-            arr[1] = -newY;
+            arr[1] = newY;
             arr[2] = ballPosition.y;
             return arr;
          }
          return new int[]{-1};
    }
 
-    public double[] isTouching(Shape currCircle, Shape[] Obstacles) {
+    public static double[] isTouching(Shape currCircle, Shape[] Obstacles) {
         int radius = 25;
         double[] center = currCircle.center;
         for (Shape obs : Obstacles) {

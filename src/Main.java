@@ -13,7 +13,7 @@ public class Main {
         jFrame.setSize(1920, 1080);
         jFrame.setVisible(true);
         Thread.sleep(1000);
-        golfBall.move(new Point(800, 300), 30);
+        golfBall.move(new Point(20, 1000), 30);
 //        golfBall.move(new Point(60, 300));
     }
 }

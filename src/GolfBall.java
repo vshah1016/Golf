@@ -18,17 +18,21 @@ public class GolfBall {
 
     public void move(Point newLocation, int speed) throws InterruptedException {
         //TODO CHECK BOUNCE WITHIN POINT
+        int[] bounceLine = Bounce.bounceCheck(newLocation.y, newLocation.x);
+        boolean bounce = bounceLine[0] == -1;
+        if (bounce){
+
+        }
         Point currentLocation, initialPoint;
         currentLocation = locations.currentLocation();
         initialPoint = locations.currentLocation();
-        //todo calc how many iteration and all transition points then animate
         double m = (double)(newLocation.y - currentLocation.y) / (double)(newLocation.x - currentLocation.x);
         double b = currentLocation.y - (m * currentLocation.x);
         ArrayList<Point> points = new ArrayList<>();
         double d1 = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
         int v = speed;
         int vi = v;
-        for(int i = 0; v > 0; i++){
+        while (v > 0) {
             double d = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
             int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
             int y3 = (int) Math.ceil((m * x3 + b));
