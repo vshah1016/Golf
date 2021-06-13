@@ -39,7 +39,7 @@ public class CourseGen {
                 obsCoors[i]=obs;
             }
             Shape circle = genHole();
-            if(!overlap(circle,obsCoors)){
+            if(!overlap(circle,obsCoors) && !drootOverlap(circle,obsCoors)){
                 System.out.println(obsCoors[0].coors[0][0]);
                 System.out.println(obsCoors[1].coors[0][0]);
                 System.out.println(obsCoors[2].coors[0][0]);
@@ -50,6 +50,19 @@ public class CourseGen {
 
             }
         }
+    }
+    static public boolean drootOverlap(Shape hole, Shape [] obsCoors)
+    {
+            double [] center = hole.center;
+            double x = center[0];
+            double y = center[1];
+        for(Shape obs: obsCoors)
+        {
+            double [][] coors = obs.coors;
+            if(!(Math.abs(coors[1][0]-x) > 25 && Math.abs(coors[0][0]-x) > 25 && Math.abs(coors[0][1]-y) > 25 && Math.abs(coors[1][1]-y) > 25))
+                return true;
+        }
+        return false;
     }
     //use overlap to check if wall, obstacle, and hole are touching but also repurpose to check if ball in hole
     static public boolean overlap(Shape hole, Shape[] obsCoors){
