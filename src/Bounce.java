@@ -52,9 +52,10 @@ public class Bounce {
                int newY = diffX*y;
                int newX = diffY*x;
             }
-            int [] arr = new int[2];
+            int [] arr = new int[3];
             arr[0] = newX;
             arr[1] = -newY;
+            arr[2] = y;
             return arr;
          
          }
