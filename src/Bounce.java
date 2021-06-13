@@ -39,7 +39,7 @@ public class Bounce {
             int[] arr = new int[4];
             arr[0] = newX;
             arr[1] = newY;
-            arr[2] = ballPosition.y;
+            arr[2] = ballPosition.y - (ballPosition.x * newY/newX);
             arr[4] = impactDirection;
             return arr;
          }
