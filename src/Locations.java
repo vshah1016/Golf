@@ -17,7 +17,7 @@ public class Locations {
     }
 
     public double getVelocity() {
-        //TODO: @SURYAAcoolness@gmail.com
+        //TODO: @SURYAAcoolness@gmail.com make it from the arraylist
         return 0;
     }
 

@@ -5,7 +5,6 @@ public class GolfFrame extends Component {
     public GolfFrame(GolfBall golfBall) {
         this.golfBall = golfBall;
         setSize(new Dimension(1920, 1080));
-        setBackground(Color.green);
         setVisible(true);
     }
 
