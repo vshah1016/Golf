@@ -17,15 +17,17 @@ public class CourseGen {
             Shape[] obsCoors = new Shape[3];
             for(int i=0; i<3; i++){
                 coors = new double[2][2];
+                int rLength;
+                int rWidth;
                 if(i == 0)
                 {
-                    int rLength = rand.nextInt(200 - 50 + 1) + 50;
-                    int rWidth = rand.nextInt(200 - 50 + 1) + 250;
+                    rLength = rand.nextInt(200 - 50 + 1) + 50;
+                    rWidth = rand.nextInt(200 - 50 + 1) + 250;
                 }
                 else
                 {
-                    int rLength = rand.nextInt(200 - 50 + 1) + 250;
-                    int rWidth = rand.nextInt(200 - 50 + 1) + 50;
+                    rLength = rand.nextInt(200 - 50 + 1) + 250;
+                    rWidth = rand.nextInt(200 - 50 + 1) + 50;
                 }
                 int rXVal = rand.nextInt(1910 - 10 + 1) + 10;
                 int rYVal = rand.nextInt(1070 - 10 + 1) + 10;
