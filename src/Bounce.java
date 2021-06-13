@@ -1,6 +1,7 @@
 public class Bounce {
     public static int[] bounceCheck(int lilUzi, int horizontal) {
         Point ballPosition = GolfBall.locations.currentLocation();
+        int impactDirection;
         double[] coords = new double[]{ballPosition.x, ballPosition.y};
          double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
          int[][] points = new int[][]{
@@ -18,10 +19,12 @@ public class Bounce {
             if(changeX == 0) {
                newX = - 1* horizontal;
                newY = lilUzi;
+               impactDirection = 0;
             }
             else if(changeY == 0) {
                newX = horizontal;
                newY = -1*lilUzi;
+               impactDirection = 1;
             }
             else {
                //Slope of final trajectory = wallSlope/(initialDirection/wallSlope);
@@ -31,11 +34,13 @@ public class Bounce {
          
                newY = diffX* ballPosition.y;
                newX = diffY* ballPosition.x;
+               impactDirection = 0;
             }
-            int[] arr = new int[3];
+            int[] arr = new int[4];
             arr[0] = newX;
             arr[1] = newY;
             arr[2] = ballPosition.y;
+            arr[4] = impactDirection;
             return arr;
          }
          return new int[]{-1};
