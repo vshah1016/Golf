@@ -45,8 +45,7 @@ public class Bounce {
          }
          return new int[]{-1};
    }
-  
- /*  public static double[] ballHittingObstacle(Shape circle, Shape [] Obstacles)
+   public static double[] ballHittingObstacle(Shape circle, Shape [] Obstacles)
    {
         double [][] pointsConnectingWallOfContact = new double[2][2];
         for(int i = 0; i < 2; i++)
@@ -55,7 +54,7 @@ public class Bounce {
             {
                 pointsConnectingWallOfContact[i][j] = -1;
             }
-        }
+        }    
         int radius = 25;
         double [] center = circle.center;
         double x = center[0];
@@ -63,15 +62,36 @@ public class Bounce {
         for(Shape obs: Obstacles)
         {
             double [][] coors = obs.coors;
-            if(((x+radius >= coors[0][0] && x+radius <= coors[1][0]) || (x-radius >= coors[0][0] && x-radius <= coors[1][0])) && ((y+radius >= coors[0][1] && y+radius <= coors[1][1]) || (y-radius >= coors[0][1] && y-radius <= coors[1][1]))
+            if(radius+x > coors[0][0] && radius+x < coors[1][0] && y > coors[0][1] && y < coors[1][1])
+            {
+                pointsConnectingWallOfContact[0] = coors[0];
+                pointsConnectingWallOfContact[1][0] = coors[0][0];
+                pointsConnectingWallOfContact[1][1] = coors[1][1];
+            }
+            else if(x-radius > coors[0][0] && x-radius < coors[1][0] && y > coors[0][1] && y < coors[1][1])
+            {
+                pointsConnectingWallOfContact[0][0] = coors[1][0];
+                pointsConnectingWallOfContact[0][1] = coors[0][1];
+                pointsConnectingWallOfContact[1] = coors[1];
+            }
+            else if(x > coors[0][0] && x < coors[1][0] && y+radius > coors[0][1] && y+radius < coors[1][1])
+            {
+                pointsConnectingWallOfContact[0] = coors[0];
+                pointsConnectingWallOfContact[1][0] = coors[1][0];
+                pointsConnectingWallOfContact[1][1] = coors[0][1];
+            }
+            else if(x > coors[0][0] && x < coors[1][0] && y-radius > coors[0][1] && y-radius < coors[1][1])
+            {
+                pointsConnectingWallOfContact[0][0] = coors[0][0];
+                pointsConnectingWallOfContact[0][1] = coors[1][1];
+                pointsConnectingWallOfContact[1] = coors[1];
+            }
             
-               
-            if((x+radius >= coors[0][0] && x+radius <= coors[1][0]) && (y+radius >= coors[0][1] && y+radius <= coors[1][1]))
-               pointsConnectingWallOfContact[0][0] = coors
         }
-        return false;
-    } */
-
+        return pointsConnectingWallOfContact;
+        
+   }
+  
     public static double[] isTouching(Shape currCircle, Shape[] Obstacles) {
         int radius = 25;
         double[] center = currCircle.center;
