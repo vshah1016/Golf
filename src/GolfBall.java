@@ -18,11 +18,7 @@ public class GolfBall {
 
     public void move(Point newLocation, int speed, int power) throws InterruptedException {
         //TODO CHECK BOUNCE WITHIN POINT
-        int[] bounceLine = Bounce.bounceCheck(newLocation.y, newLocation.x);
-        boolean bounce = bounceLine[0] == -1;
-        if (bounce){ // 0 lR; 1TB
 
-        }
         Point currentLocation, initialPoint;
         currentLocation = locations.currentLocation();
         initialPoint = locations.currentLocation();
@@ -33,6 +29,11 @@ public class GolfBall {
         int v = speed;
         int vi = v;
         while (v > 0) {
+            int[] bounceLine = Bounce.bounceCheck(newLocation.y, newLocation.x);
+            boolean bounce = bounceLine[0] != -1;
+            if (bounce){ // 0 lR; 1TB
+
+            }
             double d = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
             int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
             int y3 = (int) Math.ceil((m * x3 + b));

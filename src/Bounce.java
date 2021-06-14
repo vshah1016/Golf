@@ -46,10 +46,11 @@ public class Bounce {
          return new int[]{-1};
    }
 
-    public static double[] isTouching(Shape currCircle, Shape[] Obstacles) {
+    public static double[] isTouching(Shape currCircle, Shape[] obstacles) {
         int radius = 25;
         double[] center = currCircle.center;
-        for (Shape obs : Obstacles) {
+        for (int j = 1, obstaclesLength = obstacles.length; j < obstaclesLength; j++) {
+            Shape obs = obstacles[j];
             double[][] coors = obs.coors;
             for (int i = (int) coors[0][1]; i < coors[1][1]; i++) {
                 if (Math.pow((coors[0][0] - center[0]), 2) + Math.pow((i - center[1]), 2) == Math.pow(radius, 2)) {

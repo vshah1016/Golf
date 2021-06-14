@@ -14,7 +14,7 @@ public class Main {
         jFrame.setVisible(true);
         Thread.sleep(1000);
         int power = 100;
-        golfBall.move(new Point(20, 1000), 30, power);
+        golfBall.move(new Point(1100, 100), 30, power);
 //        golfBall.move(new Point(60, 300));
     }
 }
