@@ -36,7 +36,7 @@ public class Bounce {
                newX = diffY* ballPosition.x;
                impactDirection = 0;
             }
-            int[] arr = new int[4];
+            int[] arr = new int[5];
             arr[0] = newX;
             arr[1] = newY;
             arr[2] = ballPosition.y - (ballPosition.x * newY/newX);

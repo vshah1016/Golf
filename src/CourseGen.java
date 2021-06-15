@@ -49,7 +49,6 @@ public class CourseGen {
                 return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2],obsCoors[3], obsCoors[4], obsCoors[5]};
 
             }
-            System.out.println("hi");
         }
     }
     static public boolean drootOverlap(Shape hole, Shape [] obsCoors)

@@ -29,10 +29,10 @@ public class GolfBall {
         int v = speed;
         int vi = v;
         while (v > 0) {
-            int[] bounceLine = Bounce.bounceCheck(newLocation.y, newLocation.x);
+            int[] bounceLine = Bounce.bounceCheck(currentLocation.x, currentLocation.y);
             boolean bounce = bounceLine[0] != -1;
             if (bounce){ // 0 lR; 1TB
-
+                System.out.println("MAMA");
             }
             double d = Math.sqrt(Math.pow(currentLocation.x - newLocation.x, 2) + Math.pow(currentLocation.y - newLocation.y, 2));
             int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
