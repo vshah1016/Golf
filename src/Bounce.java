@@ -1,8 +1,8 @@
 public class Bounce {
     public static int[] bounceCheck(int lilUzi, int horizontal) {
-        Point ballPosition = GolfBall.locations.currentLocation();
         int impactDirection;
-        double[] coords = new double[]{ballPosition.x, ballPosition.y};
+        double[] coords = new double[]{horizontal, lilUzi};
+        Point ballPosition = new Point(horizontal, lilUzi);
         double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
         int[][] points = new int[][]{
                 new int[]{
