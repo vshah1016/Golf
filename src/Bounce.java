@@ -19,14 +19,20 @@ public class Bounce {
             if (changeX == 0) {
                 newX = -1 * horizontal;
                 newY = lilUzi;
-                impactDirection = 0;
+                if(newX > 0)
+                    impactDirection = 0;
+                else if(newX < 0)
+                    impactDirection = 1;
             } else if (changeY == 0) {
                 newX = horizontal;
                 newY = -1 * lilUzi;
-                impactDirection = 1;
+                if(newY > 0)
+                    impactDirection = 2;
+                else if(newY < 0)
+                    impactDirection = 3;
             } else {
                 //Slope of final trajectory = wallSlope/(initialDirection/wallSlope);
-
+                //this won't happen because no diagonal obstacles
                 int diffY = changeX * lilUzi;
                 int diffX = changeY * horizontal;
 
