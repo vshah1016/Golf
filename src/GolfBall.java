@@ -29,7 +29,7 @@ public class GolfBall {
         int v = speed;
         int vi = v;
         while (v > 0) {
-            int[] bounceLine = Bounce.bounceCheck(currentLocation.x, currentLocation.y);
+            int[] bounceLine = Bounce.bounceCheck(currentLocation.y, currentLocation.x);
             boolean bounce = bounceLine[0] != -1;
             if (bounce){ // 0 lR; 1TB
                 System.out.println("MAMA");
