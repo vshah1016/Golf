@@ -26,7 +26,7 @@ public class Shot {
 
     public void calculate(){
         Point currentLocation = locations.currentLocation();
-        while(paths.isEmpty() && endingPoint().isEqual(destination)){
+        while(paths.isEmpty() && power <= 0){
             Path newPath;
             Point startingPoint, endingPoint;
             int vi, vf;
