@@ -4,13 +4,7 @@ public class Bounce {
         double[] coords = new double[]{horizontal, lilUzi};
         Point ballPosition = new Point(horizontal, lilUzi);
         double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
-        for(int [] arr:isTouching)
-        {
-           for(int i : arr)
-           {
-              System.out.println(i);   
-           }
-        }
+
         int[][] points = new int[][]{
                 new int[]{
                         (int) isTouching[0], (int) isTouching[1]
@@ -19,6 +13,13 @@ public class Bounce {
                         (int) isTouching[2], (int) isTouching[3]
                 }
         };
+        for(int [] arr:points)
+        {
+           for(int i : arr)
+           {
+              System.out.println(i);   
+           }
+        }
         if (points[0][0] != -1) {
             int changeY = (points[1][1] - points[0][1]);
             int changeX = (points[1][0] - points[0][0]);
