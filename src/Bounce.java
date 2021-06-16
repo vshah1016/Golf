@@ -43,23 +43,24 @@ public class Bounce {
                 newX = diffY * ballPosition.x;
                 impactDirection = 0;
             }
-            int[] arr = new int[4];
+            int[] arr = new int[5];
             arr[0] = newX;
             arr[1] = -newY;
             arr[2] = ballPosition.y - (ballPosition.x * newY / newX);
             arr[3] = impactDirection;
             String verbal;
-       /*     if(arr[0] > 0 && arr[1] > 0)
-                verbal = "downRight";
+            if(arr[0] > 0 && arr[1] > 0)
+                verbal = "1downRight";
             else if(arr[0] > 0 && arr[1] < 0)
-                verbal = "upRight";
+                verbal = "2upRight";
             else if(arr[0] < 0 && arr[1] > 0)
-                verbal = "downLeft";
+                verbal = "3downLeft";
             else if(arr[0] < 0 && arr[1] < 0)
-                verbal = "upLeft";
+                verbal = "4upLeft";
             else
-                verbal = "straightUpOrStraightDown";
-            arr[4] = verbal; */
+                verbal = "5straightUpOrStraightDown";
+            int direction = Integer.parseInt(verbal.substring(0,1));
+            arr[4] = direction;
             System.out.println(Arrays.toString(arr));
             return arr;
         }
