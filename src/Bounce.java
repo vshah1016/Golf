@@ -81,6 +81,13 @@ public class Bounce {
         }
         return new int[]{-1};
     }
+    public double angleToSlope(double angle)
+    {
+        if(angle < 0 || angle > 360)
+            return 0;
+        double angleInRadians = Math.toRadians(angle);
+        return Math.tan(angleInRadians);
+    }
 
     public static double[][] ballHittingObstacle(Shape circle, Shape[] Obstacles) {
         double[][] pointsConnectingWallOfContact = new double[2][2];
