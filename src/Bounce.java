@@ -75,6 +75,7 @@ public class Bounce {
                 verbal = "5straightUpOrStraightDown";
             int direction = Integer.parseInt(verbal.substring(0,1));
             arr[4] = direction; */
+            arr[3] = impactDirection;
             System.out.println(Arrays.toString(arr));
             return arr;
         }
