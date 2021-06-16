@@ -17,7 +17,10 @@ public class Bounce {
         {
            for(int i : arr)
            {
-              System.out.println(i);   
+              if(i != -1)
+              {
+                System.out.println(i);   
+              }
            }
         }
         if (points[0][0] != -1) {
