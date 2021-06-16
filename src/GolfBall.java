@@ -96,4 +96,8 @@ public class GolfBall {
         move(new Point(x3, y3), v, 100);
     }
 
+    public void newMove(Path path){
+
+    }
+
 }

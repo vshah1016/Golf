@@ -14,4 +14,12 @@ public class Point {
     public double distance(Point a){
         return Math.sqrt(Math.pow(this.x - a.x, 2) + Math.pow(this.y - a.y, 2));
     }
+
+    public boolean isEqual(Point c){
+        try {
+            return this.x == c.x && this.y == c.y;
+        } catch (NullPointerException e){
+            return false;
+        }
+    }
 }
