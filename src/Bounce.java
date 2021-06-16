@@ -1,6 +1,6 @@
 public class Bounce {
     public static int[] bounceCheck(int lilUzi, int horizontal) {
-        int impactDirection;
+        int impactDirection = 0;
         double[] coords = new double[]{horizontal, lilUzi};
         Point ballPosition = new Point(horizontal, lilUzi);
         double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
