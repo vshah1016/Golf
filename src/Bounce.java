@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Bounce {
     public static int[] bounceCheck(int lilUzi, int horizontal) {
         int impactDirection = 0;
@@ -13,16 +15,6 @@ public class Bounce {
                         (int) isTouching[2], (int) isTouching[3]
                 }
         };
-        for(int [] arr:points)
-        {
-           for(int i : arr)
-           {
-              if(i != -1)
-              {
-                System.out.println(i);   
-              }
-           }
-        }
         if (points[0][0] != -1) {
             int changeY = (points[1][1] - points[0][1]);
             int changeX = (points[1][0] - points[0][0]);
@@ -53,9 +45,10 @@ public class Bounce {
             }
             int[] arr = new int[4];
             arr[0] = newX;
-            arr[1] = newY;
+            arr[1] = -newY;
             arr[2] = ballPosition.y - (ballPosition.x * newY / newX);
             arr[3] = impactDirection;
+            System.out.println(Arrays.toString(arr));
             return arr;
         }
         return new int[]{-1};

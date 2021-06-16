@@ -26,7 +26,7 @@ public class Locations {
     }
 
     public void bounce(){
-        locations.remove(locations.size() -1 );
+        locations.remove(locations.size() - 1 );
     }
 
 }

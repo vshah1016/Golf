@@ -40,12 +40,6 @@ public class CourseGen {
             }
             Shape circle = genHole();
             if(!overlap(circle,obsCoors) && !drootOverlap(circle,obsCoors)){
-                System.out.println(obsCoors[0].coors[0][0]);
-                System.out.println(obsCoors[1].coors[0][0]);
-                System.out.println(obsCoors[2].coors[0][0]);
-                System.out.println(obsCoors[3].coors[0][0]);
-                System.out.println(obsCoors[4].coors[0][0]);
-                System.out.println(obsCoors[5].coors[0][0]);
                 return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2],obsCoors[3], obsCoors[4], obsCoors[5]};
 
             }

@@ -17,6 +17,7 @@ public class GolfBall {
     }
 
     public void move(Point newLocation, int speed, int power) throws InterruptedException {
+        //TODO BOUNCING STARTING V ENDING V
         //TODO IMPLEMENT POWER
         Point currentLocation, initialPoint;
         currentLocation = locations.currentLocation();
@@ -28,22 +29,25 @@ public class GolfBall {
         int v = speed;
         int vi = v;
         while (v > 0) {
+            currentLocation = locations.currentLocation();
             int[] bounceLine = Bounce.bounceCheck(currentLocation.y, currentLocation.x);
             boolean bounce = bounceLine[0] != -1;
             if (bounce){ // 0 lR; 1TB
                 System.out.println("MAMA");
-                int CONSTANT_POWER = 50; //todo implement power
+                int CONSTANT_POWER = 200; //todo implement power
                 Point distantPoint;
                 double slopeBounce = (double) bounceLine[1] / bounceLine[0];
                 double intercept = bounceLine[3];
-                switch (bounceLine[4]) {
+                switch (bounceLine[3]) {
                     case 0 -> {
                         distantPoint = new Point(1920, (int) (1920 * slopeBounce + intercept));
                         bounceLR(v, CONSTANT_POWER, distantPoint, slopeBounce, intercept);
+                        return;
                     }
                     case 1 -> {
                         distantPoint = new Point(0, (int) (0 * slopeBounce + intercept));
                         bounceLR(v, CONSTANT_POWER, distantPoint, slopeBounce, intercept);
+                        return;
                     }
                     case 2 -> {
                         break;
@@ -63,7 +67,6 @@ public class GolfBall {
                     }
                     default -> throw new IllegalStateException("Unexpected value: " + bounceLine[4]);
                 }
-                return;
             }
             double d = currentLocation.distance(newLocation);
             int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
@@ -75,21 +78,11 @@ public class GolfBall {
             Thread.sleep(10);
             Main.jFrame.validate();
             Main.jFrame.repaint();
-            currentLocation = point3;
             double d2 = initialPoint.distance(currentLocation);
             v = (int) ((vi * (d / d1)));
             if (v == 1 || v == 0) v = 2;
             if ((int) d < 2) v = 0;
         }
-//        points.add(newLocation);
-//        for (Point point : points) {
-//            locations.newLocations(point);
-//            GolfFrame golfFrame = new GolfFrame(new GolfBall(obstacles), obstacles);
-//            Main.jFrame.add(golfFrame);
-//            Thread.sleep(10);
-//            Main.jFrame.validate();
-//            Main.jFrame.repaint();
-//        }
     }
 
     private void bounceLR(int v, int CONSTANT_POWER, Point distantPoint, double slopeBounce, double intercept) throws InterruptedException {
