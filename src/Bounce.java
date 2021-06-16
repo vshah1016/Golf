@@ -23,9 +23,9 @@ public class Bounce {
                 newX = -1 * horizontal;
                 newY = lilUzi;
                 if(newX > 0)
-                    impactDirection = 0;
+                    impactDirection = 0; //Right
                 else if(newX < 0)
-                    impactDirection = 1;
+                    impactDirection = 1; //Left
             } else if (changeY == 0) {
                 newX = horizontal;
                 newY = -1 * lilUzi;
@@ -49,7 +49,21 @@ public class Bounce {
             arr[2] = ballPosition.y - (ballPosition.x * newY / newX);
             arr[3] = impactDirection;
             String verbal;
-            if(arr[0] > 0 && arr[1] > 0)
+            if(impactDirection == 2)
+            {
+                if(newX < 0)
+                    impactDirection = 2; //Up left
+                if(newX > 0)
+                    impactDirection = 3; //Up right
+            }
+            else if(impactDirection == 3)
+            {
+                if(newX < 0)
+                    impactDirection = 4; //Down left
+                if(newX > 0)
+                    impactDirection = 5; //Down right
+            }
+           /* if(arr[0] > 0 && arr[1] > 0)
                 verbal = "1downRight";
             else if(arr[0] > 0 && arr[1] < 0)
                 verbal = "2upRight";
@@ -60,7 +74,7 @@ public class Bounce {
             else
                 verbal = "5straightUpOrStraightDown";
             int direction = Integer.parseInt(verbal.substring(0,1));
-            arr[4] = direction;
+            arr[4] = direction; */
             System.out.println(Arrays.toString(arr));
             return arr;
         }
