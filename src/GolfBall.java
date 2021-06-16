@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class GolfBall {
     public static final int SIZE = 25;
-    public static final Locations locations = new Locations(new Point(80, 900));
+    public static final Locations locations = Main.locations;
     private final Shape[] obstacles;
 
     public GolfBall(Shape[] obstacles) {
@@ -51,11 +51,13 @@ public class GolfBall {
                     }
                     case 2 -> {
                         break;
-//                        distantPoint = new Point(1920, (int) (1920 * slopeBounce + intercept));
-//                        double d = currentLocation.distance(distantPoint);
-//                        int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((CONSTANT_POWER * (currentLocation.x - distantPoint.x) / d))));
-//                        int y3 = (int) (x3 * slopeBounce + intercept);
-//                        move(new Point(x3, y3), v, 100);
+/*
+                        distantPoint = new Point(1920, (int) (1920 * slopeBounce + intercept));
+                        double d = currentLocation.distance(distantPoint);
+                        int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((CONSTANT_POWER * (currentLocation.x - distantPoint.x) / d))));
+                        int y3 = (int) (x3 * slopeBounce + intercept);
+                        move(new Point(x3, y3), v, 100);
+*/
                     }
                     case 3 -> {
                         break;

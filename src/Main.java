@@ -4,6 +4,7 @@ import java.awt.*;
 public class Main {
     static JFrame jFrame = new JFrame();
     static Shape[] obstacles = CourseGen.genObstacle();
+    static Locations locations = new Locations(new Point(80, 900));
     public static void main(String[] args) throws InterruptedException {
         GolfBall golfBall = new GolfBall(obstacles);
         GolfFrame golfCourse = new GolfFrame(golfBall, obstacles);
