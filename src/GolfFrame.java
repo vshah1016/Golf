@@ -8,25 +8,20 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
     final Shape[] obstacles;
     private boolean moving;
 
-    private Shooter line;
-    public GolfFrame(GolfBall golfBall, Shape[] obstacles, boolean moving) {
+    Timer t = new Timer(15, this);
+
+    public Shooter line;
+    public GolfFrame(GolfBall golfBall, Shape[] obstacles, boolean moving) throws InterruptedException {
+        super(new BorderLayout());
         this.golfBall = golfBall;
         this.obstacles = obstacles;
         this.moving = moving;
+        t.start();
         setSize(new Dimension(1920, 1080));
         setBackground(new Color(31, 163, 71));
         setFocusable(true);
+        requestFocusInWindow();
         setVisible(true);
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                try {
-                    keyboardPress(e);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-            }
-        });
     }
 
     public void paintComponent(Graphics g) {
@@ -38,7 +33,9 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
             Point lineEndpoint = line.endPoint();
             g.drawLine(currentLocation.x + 13, currentLocation.y + 13, lineEndpoint.x + 13, lineEndpoint.y + 13);
         }
-        golfBall.draw(g);
+        Point currentLocation = golfBall.location();
+        g.setColor(Color.WHITE);
+        g.fillOval(currentLocation.x, currentLocation.y, 25,  25);
         Shape hole = obstacles[0];
         g.setColor(Color.black);
         g.fillOval((int)hole.center[0], (int)hole.center[1], (int)hole.radius * 2, (int)hole.radius * 2);
@@ -56,10 +53,12 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
     public void shoot(){
         moving = false;
         line = new Shooter(Main.locations.currentLocation());
+        this.repaint();
     }
 
     public void move(){
         moving = true;
+        this.repaint();
     }
 
     @Override
@@ -69,7 +68,11 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        try {
+            keyboardPress(e);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
     }
 
     public void keyboardPress(KeyEvent e) throws InterruptedException {
@@ -89,23 +92,6 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
             }
             case KeyEvent.VK_DOWN -> {
                 line.decreasePower();
-                repaint();
-            }
-            case KeyEvent.VK_ENTER -> {
-                Point currentLocation = Main.locations.currentLocation();
-                Point endpoint = line.endPoint();
-                double m = (endpoint.y * 1.0 - currentLocation.y) / (endpoint.x - currentLocation.x);
-                double b = endpoint.y - m * endpoint.x;
-                int x = currentLocation.x + (endpoint.x - currentLocation.x) * 5;
-                Point newPoint = new Point(x, (int) (m * x + b));
-                Shot shot = new Shot(newPoint, line.power * 5);
-                this.move();
-                repaint();
-                for (Path path : shot.paths){
-                    golfBall.move(path.endingPoint, path.vi, path.vf);
-                }
-                Main.locations.newLocations(shot.endingPoint());
-                this.shoot();
                 repaint();
             }
             default -> {}
