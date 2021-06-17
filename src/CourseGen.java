@@ -5,7 +5,7 @@ public class CourseGen {
     static public Shape genHole(){
         //preset to not hit wall by subtracting 25 from 1920 and 1080 and starting at 25
         int rXval = rand.nextInt(1885 - 1600 + 1) + 1600;
-        int rYval = rand.nextInt(200 - 25 + 1) + 25;
+        int rYval = rand.nextInt(900 - 800 + 1) + 800;
         Shape shape = new Shape(new double[][]{},new double[]{rXval,rYval},25,true);
         return shape;
     }
@@ -40,7 +40,7 @@ public class CourseGen {
             }
             Shape circle = genHole();
             if(!overlap(circle,obsCoors) && !drootOverlap(circle,obsCoors)){
-                return new Shape[]{circle,obsCoors[0],obsCoors[1],obsCoors[2],obsCoors[3], obsCoors[4], obsCoors[5]};
+                return new Shape[]{circle,obsCoors[0],obsCoors[1], new Shape(new double[][]{{0,20},{1920,50}},new double[]{0}, 0, false),new Shape(new double[][]{{0,1080},{1920,1030}},new double[]{0}, 0, false)};
 
             }
         }
