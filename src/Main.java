@@ -11,6 +11,8 @@ public class Main {
     static GolfBall golfBall = new GolfBall();
     static GolfFrame golfCourse;
 
+    static boolean won = false;
+
     static {
         try {
             golfCourse = new GolfFrame(golfBall, obstacles, false);
@@ -37,9 +39,10 @@ public class Main {
 
             }
         });
-
-        while (true) {
-            System.out.print("Shoot: ");
+        int count = 1;
+        Point hole = new Point((int) obstacles[0].center[0], (int) obstacles[0].center[1]);
+        while (!won) {
+            System.out.print("Shot " + count + ": ");
             scanner.next();
             shootBall();
         }
@@ -60,7 +63,10 @@ public class Main {
         }
         Main.locations.newLocations(shot.endingPoint());
         golfCourse.shoot();
+    }
 
-
+    public static void won() {
+        won = true;
+        System.exit(0);
     }
 }

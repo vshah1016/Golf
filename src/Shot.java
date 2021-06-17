@@ -78,10 +78,11 @@ public class Shot {
                 vf = 0;
                 power = 0;
             }
-            m = bouncePath.m;
-            b = bouncePath.b;
-            direction = bouncePath.direction;
-
+            if (bouncePath.bounce) {
+                m = bouncePath.m;
+                b = bouncePath.b;
+                direction = bouncePath.direction;
+            }
             newPath = new Path(startingPoint, endingPoint, vi, vf);
             paths.add(newPath);
         }

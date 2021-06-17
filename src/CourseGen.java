@@ -40,7 +40,7 @@ public class CourseGen {
             }
             Shape circle = genHole();
             if(!overlap(circle,obsCoors) && !drootOverlap(circle,obsCoors)){
-                return new Shape[]{circle,obsCoors[0],obsCoors[1], new Shape(new double[][]{{0,20},{1920,50}},new double[]{0}, 0, false),new Shape(new double[][]{{0,1080},{1920,1030}},new double[]{0}, 0, false)};
+                return new Shape[]{circle,obsCoors[0],obsCoors[1], new Shape(new double[][]{{0,1080},{1920,1030}},new double[]{0}, 0, false)};
 
             }
         }
