@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Bounce {
@@ -18,9 +17,6 @@ public class Bounce {
             if (leftY >= coors[0][1] && leftY <= coors[1][1]) arrX.add((int) coors[0][0]);
             if (rightY >= coors[0][1] && rightY <= coors[1][1]) arrX.add((int) coors[1][0]);
         }
-        /*if((1080-b)/m>=0&&(1080-b)/m<=1920){arrX.add((int)((1080-b)/m));}
-        if((0-b)/m>=0&&(0-b)/m<=1920){arrX.add((int)((0-b)/m));}*/
-
 
         Collections.sort(arrX);
         if(arrX.size()>0) if (direction == 1) {

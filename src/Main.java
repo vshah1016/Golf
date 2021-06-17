@@ -5,47 +5,44 @@ import java.util.Scanner;
 
 public class Main {
     static final Scanner scanner = new Scanner(System.in);
-    static JFrame jFrame = new JFrame();
-    static Shape[] obstacles = CourseGen.genObstacle();
+    static JFrame jFrame;
+    static Shape[] obstacles;
     static Locations locations = new Locations(new Point(80, 900));
-    static GolfBall golfBall = new GolfBall();
+    static GolfBall golfBall;
     static GolfFrame golfCourse;
 
     static boolean won = false;
 
-    static {
-        try {
-            golfCourse = new GolfFrame(golfBall, obstacles, false);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
-        golfCourse.shoot();
-        jFrame.add(golfCourse);
-        jFrame.pack();
-        jFrame.setSize(1920, 1080);
-        jFrame.setVisible(true);
+            jFrame = new JFrame();
+            obstacles = CourseGen.genObstacle();
+            golfBall = new GolfBall();
+            locations.reset();
+            golfCourse = new GolfFrame(golfBall, obstacles, false);
 
-        golfCourse.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                try {
-                    golfCourse.keyboardPress(e);
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
+            golfCourse.shoot();
+            jFrame.add(golfCourse);
+            jFrame.pack();
+            jFrame.setSize(1920, 1080);
+            jFrame.setVisible(true);
+
+            golfCourse.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    try {
+                        golfCourse.keyboardPress(e);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
                 }
-
+            });
+            int count = 1;
+            while (!won) {
+                System.out.print("Shot " + count + ": ");
+                scanner.next();
+                shootBall();
+                count++;
             }
-        });
-        int count = 1;
-        Point hole = new Point((int) obstacles[0].center[0], (int) obstacles[0].center[1]);
-        while (!won) {
-            System.out.print("Shot " + count + ": ");
-            scanner.next();
-            shootBall();
-        }
     }
 
     public static void shootBall() throws InterruptedException {
@@ -67,6 +64,7 @@ public class Main {
 
     public static void won() {
         won = true;
+        locations.reset();
         System.exit(0);
     }
 }

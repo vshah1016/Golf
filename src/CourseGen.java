@@ -6,8 +6,7 @@ public class CourseGen {
         //preset to not hit wall by subtracting 25 from 1920 and 1080 and starting at 25
         int rXval = rand.nextInt(1885 - 1600 + 1) + 1600;
         int rYval = rand.nextInt(900 - 800 + 1) + 800;
-        Shape shape = new Shape(new double[][]{},new double[]{rXval,rYval},25,true);
-        return shape;
+        return new Shape(new double[][]{},new double[]{rXval,rYval},25,true);
     }
     public static Shape[] genObstacle(){
 
@@ -40,7 +39,7 @@ public class CourseGen {
             }
             Shape circle = genHole();
             if(!overlap(circle,obsCoors) && !drootOverlap(circle,obsCoors)){
-                return new Shape[]{circle,obsCoors[0],obsCoors[1], new Shape(new double[][]{{0,1080},{1920,1030}},new double[]{0}, 0, false)};
+                return new Shape[]{circle,obsCoors[0],obsCoors[1]};
 
             }
         }
@@ -112,4 +111,3 @@ public class CourseGen {
         return false;
     }
 }
-//todo ball obstacle, obstacle obstacle

@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 public class GolfBall {
@@ -24,7 +23,6 @@ public class GolfBall {
             int y3 = (int) Math.ceil((m * x3 + b));
             Point point3 = new Point(x3, y3);
             locations.newLocations(point3);
-//            Thread.sleep();
             TimeUnit.MILLISECONDS.sleep(10);
             Main.golfCourse.repaint();
             int newv = (int) (vi * (d / d1)) + vf;
@@ -34,9 +32,13 @@ public class GolfBall {
             if (stop){
                 v = vf;
                 stop = false;
+                locations.newLocations(newLocation);
             }
             Point hole = new Point((int) Main.obstacles[0].center[0], (int) Main.obstacles[0].center[1]);
-            if (locations.currentLocation().distance(hole) < 20) Main.won();
+            if (locations.currentLocation().distance(hole) < 50) {
+                Main.won();
+                v = vf;
+            }
         }
     }
 }

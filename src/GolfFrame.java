@@ -1,4 +1,3 @@
-import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -45,6 +44,9 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
             int[] yCoords = {(int) obstacles[i].coors[0][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[0][1]};
             g.fillPolygon(xCoords, yCoords, 4);
         }
+        int holex = (int)obstacles[0].center[0];
+        g.setColor(new Color(50,203, 227));
+        g.fillPolygon(new int[]{holex + 60, holex + 60, holex + 500, holex+500}, new int[]{1920, 0, 0, 1920}, 4);
 
 
 
@@ -94,9 +96,8 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
                 line.decreasePower();
                 repaint();
             }
-            case KeyEvent.VK_ENTER -> {
-                GolfBall.stop = true;
-            }
+            case KeyEvent.VK_ENTER -> GolfBall.stop = true;
+            case KeyEvent.VK_1 -> Main.main(null);
             default -> {}
         }
     }

@@ -7,23 +7,11 @@ public class Point {
         this.y = y;
     }
 
-    public static Point midPoint(Point a, Point b) {
-        return new Point((a.x + b.x) / 2, (a.y + b.y) / 2);
-    }
-
     public double distance(Point a){
         try {
             return Math.sqrt(Math.pow(this.x - a.x, 2) + Math.pow(this.y - a.y, 2));
         } catch (NullPointerException e){
             return -1;
-        }
-    }
-
-    public boolean isEqual(Point c){
-        try {
-            return this.x == c.x && this.y == c.y;
-        } catch (NullPointerException e){
-            return false;
         }
     }
 }

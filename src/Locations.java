@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class Locations {
     private final ArrayList<Point> locations = new ArrayList<>();
+    private final Point initialPoint;
 
     public Locations(Point initialPoint) {
         locations.add(initialPoint);
+        this.initialPoint = initialPoint;
     }
 
     public void newLocations(Point point){
@@ -15,13 +17,9 @@ public class Locations {
     public Point currentLocation(){
         return locations.get(locations.size() - 1);
     }
-    public Point lastLocation(){
-        if (locations.size() < 1) return null;
-        return locations.get(locations.size() - 2);
-    }
 
-    public void bounce(){
-        locations.remove(locations.size() - 1 );
+    public void reset(){
+        locations.clear();
+        locations.add(initialPoint);
     }
-
 }

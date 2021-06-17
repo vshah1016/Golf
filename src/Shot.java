@@ -17,16 +17,9 @@ public class Shot {
         calculate(m, b, destination.x >= currentLocation.x ? 1 : -1);
     }
 
-    public Point startingPoint(){
-        return paths.get(0).startingPoint;
-    }
     public Point endingPoint(){
         if (paths.isEmpty()) return locations.currentLocation();
         return paths.get(paths.size() - 1).endingPoint;
-    }
-    public int endingVelocity(){
-        if (paths.isEmpty()) return 30;
-        return paths.get(paths.size() - 1).vf;
     }
 
     private Path lastPath(){
@@ -49,7 +42,6 @@ public class Shot {
                 startingPoint = lastPath().endingPoint;
             }
 
-            //todo replace "new BouncePath..." with @suryaa method and assign variables to actual values
             BouncePath bouncePath = Bounce.bounce(m, b, direction, endingPoint().x, endingPoint().y);
 
             double intersectToEnd = bouncePath.intersection.distance(endingPoint());
@@ -71,9 +63,7 @@ public class Shot {
                         int y3 = (int) (x3 * m + b);
                         endingPoint = new Point(x3, y3);
                     }
-                    default -> {
-                        endingPoint = startingPoint;
-                    }
+                    default -> endingPoint = startingPoint;
                 }
                 vf = 0;
                 power = 0;
