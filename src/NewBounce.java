@@ -29,10 +29,10 @@ public class NewBounce {
         Collections.sort(arrX);
         if(arrX.size()>0){
             if (direction == 1) {
-                Point point = new Point((int) arrX.get(0), (int) ((deltaY / deltaX * 1.0) * (arrX.get(0)) + b));
+                Point point = new Point((int) arrX.get(0), (int) (slope * (arrX.get(0)) + b));
                 return new BouncePath(-1.0*(1.0*deltaY/deltaX),point.y-(1.0*deltaY/deltaX)* point.x,point,0,true);
             } else {
-                Point point = new Point((int) arrX.get(arrX.size()-1), (int) ((deltaY / deltaX * 1.0) * (arrX.get(arrX.size()-1) + b)));
+                Point point = new Point((int) arrX.get(arrX.size()-1), (int) ((slope * 1.0) * (arrX.get(arrX.size()-1) + b)));
                 return new BouncePath(-1.0*(1.0*deltaY/deltaX),point.y-(1.0*deltaY/deltaX)* point.x,point,1,true);
 
             }
