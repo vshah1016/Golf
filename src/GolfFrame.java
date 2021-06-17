@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GolfFrame extends JPanel implements ActionListener {
+public class GolfFrame extends JPanel {
     final GolfBall golfBall;
     final Shape[] obstacles;
     final boolean moving;
@@ -15,7 +15,6 @@ public class GolfFrame extends JPanel implements ActionListener {
         setBackground(new Color(31, 163, 71));
         setFocusable(true);
         setVisible(true);
-//        addKeyListener(new TAdapter());
     }
 
     public void paintComponent(Graphics g) {
@@ -30,11 +29,6 @@ public class GolfFrame extends JPanel implements ActionListener {
             int[] yCoords = {(int) obstacles[i].coors[0][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[0][1]};
             g.fillPolygon(xCoords, yCoords, 4);
         }
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
     }
 }

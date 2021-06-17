@@ -14,7 +14,10 @@ public class Main {
         jFrame.setVisible(true);
         Thread.sleep(1000);
         int power = 100;
-        golfBall.move(new Point(1100, 100), 30, power);
+        Shot shot = new Shot(new Point(1100, 100), power, 0);
+        for (Path path : shot.paths){
+            golfBall.move(path.endingPoint, path.vi, path.vf);
+        }
 //        golfBall.move(new Point(60, 300));
     }
 }

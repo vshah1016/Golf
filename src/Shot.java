@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Shot {
     final Point destination;
     final Locations locations = Main.locations;
-    final ArrayList<Path> paths = new ArrayList<>();
+    public final ArrayList<Path> paths = new ArrayList<>();
     int power;
     final int poweri;
 
@@ -11,8 +11,10 @@ public class Shot {
         this.destination = destination;
         this.power = power;
         this.poweri = power;
-
-        calculate(0, 0,1);
+        Point currentLocation = locations.currentLocation();
+        double m = (currentLocation.y - destination.y) / (double) (currentLocation.x - destination.x);
+        double b = currentLocation.y - m * currentLocation.x;
+        calculate(m, b, destination.x >= currentLocation.x ? 1 : -1);
     }
 
     public Point startingPoint(){
@@ -33,7 +35,7 @@ public class Shot {
 
     public void calculate(double m, double b, int direction){
         Point currentLocation = locations.currentLocation();
-        while(paths.isEmpty() && power <= 0){
+        while(power >= 0){
             Path newPath;
             Point startingPoint, endingPoint = null;
             int vi, vf;
