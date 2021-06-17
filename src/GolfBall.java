@@ -75,12 +75,8 @@ public class GolfBall {
             int y3 = (int) Math.ceil((m * x3 + b));
             Point point3 = new Point(x3, y3);
             locations.newLocations(point3);
-            GolfFrame golfFrame = new GolfFrame(new GolfBall(obstacles), obstacles);
-            Main.jFrame.add(golfFrame);
             Thread.sleep(10);
-            Main.jFrame.validate();
             Main.jFrame.repaint();
-            double d2 = initialPoint.distance(currentLocation);
             v = (int) ((vi * (d / d1)));
             if (v == 1 || v == 0) v = 2;
             if ((int) d < 2) v = 0;

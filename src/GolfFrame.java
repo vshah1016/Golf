@@ -1,17 +1,25 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GolfFrame extends Component {
+public class GolfFrame extends JPanel implements ActionListener {
     final GolfBall golfBall;
     final Shape[] obstacles;
-    public GolfFrame(GolfBall golfBall, Shape[] obstacles) {
+    final boolean moving;
+    public GolfFrame(GolfBall golfBall, Shape[] obstacles, boolean moving) {
         this.golfBall = golfBall;
         this.obstacles = obstacles;
+        this.moving = moving;
         setSize(new Dimension(1920, 1080));
+        setBackground(new Color(31, 163, 71));
+        setFocusable(true);
         setVisible(true);
+//        addKeyListener(new TAdapter());
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         golfBall.draw(g);
         Shape hole = obstacles[0];
         g.setColor(Color.black);
@@ -22,6 +30,11 @@ public class GolfFrame extends Component {
             int[] yCoords = {(int) obstacles[i].coors[0][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[1][1], (int) obstacles[i].coors[0][1]};
             g.fillPolygon(xCoords, yCoords, 4);
         }
-//        g.drawPolygon();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

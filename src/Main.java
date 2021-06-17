@@ -7,8 +7,7 @@ public class Main {
     static Locations locations = new Locations(new Point(80, 900));
     public static void main(String[] args) throws InterruptedException {
         GolfBall golfBall = new GolfBall(obstacles);
-        GolfFrame golfCourse = new GolfFrame(golfBall, obstacles);
-        jFrame.getContentPane().setBackground(new Color(31, 163, 71));
+        GolfFrame golfCourse = new GolfFrame(golfBall, obstacles, false);
         jFrame.add(golfCourse);
         jFrame.pack();
         jFrame.setSize(1920, 1080);
