@@ -37,7 +37,7 @@ public class Shot {
         Point currentLocation = locations.currentLocation();
         while(power > 0){
             Path newPath;
-            Point startingPoint, endingPoint = null;
+            Point startingPoint, endingPoint;
             int vi, vf;
 
             //set initial velocity and starting point of path that is being made
@@ -70,6 +70,9 @@ public class Shot {
                         int x3 = (int) Math.ceil(startingPoint.x - Math.ceil(power * (startingPoint.x - relativeDestination.x) / startingPoint.distance(relativeDestination)));
                         int y3 = (int) (x3 * m + b);
                         endingPoint = new Point(x3, y3);
+                    }
+                    default -> {
+                        endingPoint = startingPoint;
                     }
                 }
                 vf = 0;

@@ -94,6 +94,9 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
                 line.decreasePower();
                 repaint();
             }
+            case KeyEvent.VK_ENTER -> {
+                System.out.print("a");
+            }
             default -> {}
         }
     }

@@ -18,7 +18,7 @@ public class GolfBall {
         while (v > vf) {
             currentLocation = locations.currentLocation();
             double d = currentLocation.distance(newLocation);
-            int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x) / d))));
+            int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((v * (currentLocation.x - newLocation.x)) / d)));
             int y3 = (int) Math.ceil((m * x3 + b));
             Point point3 = new Point(x3, y3);
             locations.newLocations(point3);
@@ -26,7 +26,7 @@ public class GolfBall {
             TimeUnit.MILLISECONDS.sleep(10);
             Main.golfCourse.repaint();
 
-            v = (int) ((vi * (d / d1))) + vf;
+            v = (int) (vi * (d / d1)) + vf;
             if (v == 1 || v == 0) v = 2;
             if ((int) d < 2) v = vf;
         }

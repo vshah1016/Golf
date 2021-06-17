@@ -55,11 +55,9 @@ public class Main {
         Point newPoint = new Point(x, (int) (m * x + b));
         Shot shot = new Shot(newPoint, golfCourse.line.power * 5);
         golfCourse.move();
-
         for (Path path : shot.paths) {
             Main.golfBall.move(path.endingPoint, path.vi, path.vf);
         }
-
         Main.locations.newLocations(shot.endingPoint());
         golfCourse.shoot();
 
