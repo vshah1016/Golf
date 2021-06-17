@@ -6,18 +6,14 @@ public class Main {
     static Shape[] obstacles = CourseGen.genObstacle();
     static Locations locations = new Locations(new Point(80, 900));
     public static void main(String[] args) throws InterruptedException {
-        GolfBall golfBall = new GolfBall(obstacles);
+        GolfBall golfBall = new GolfBall();
         GolfFrame golfCourse = new GolfFrame(golfBall, obstacles, false);
+        golfCourse.shoot();
         jFrame.add(golfCourse);
         jFrame.pack();
         jFrame.setSize(1920, 1080);
         jFrame.setVisible(true);
         Thread.sleep(1000);
-        int power = 800;
-        Shot shot = new Shot(new Point(1100, 100), power, 0);
-        for (Path path : shot.paths){
-            golfBall.move(path.endingPoint, path.vi, path.vf);
-        }
 //        golfBall.move(new Point(60, 300));
     }
 }

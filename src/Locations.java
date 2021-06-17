@@ -20,11 +20,6 @@ public class Locations {
         return locations.get(locations.size() - 2);
     }
 
-    public double getVelocity() {
-        //TODO: @SURYAAcoolness@gmail.com make it from the arraylist
-        return 0;
-    }
-
     public void bounce(){
         locations.remove(locations.size() - 1 );
     }

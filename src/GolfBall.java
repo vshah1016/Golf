@@ -1,14 +1,8 @@
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GolfBall {
     public static final int SIZE = 25;
     public static final Locations locations = Main.locations;
-    private final Shape[] obstacles;
-
-    public GolfBall(Shape[] obstacles) {
-        this.obstacles = obstacles;
-    }
 
     public void draw(Graphics g) {
         Point currentLocation = locations.currentLocation();
@@ -37,18 +31,4 @@ public class GolfBall {
             if ((int) d < 2) v = vf;
         }
     }
-
-    private void bounceLR(int v, int CONSTANT_POWER, Point distantPoint, double slopeBounce, double intercept) throws InterruptedException {
-        Point currentLocation = locations.currentLocation();
-        locations.bounce();
-        double d = currentLocation.distance(distantPoint);
-        int x3 = (int) Math.ceil((currentLocation.x - Math.ceil((CONSTANT_POWER * (currentLocation.x - distantPoint.x) / d))));
-        int y3 = (int) (x3 * slopeBounce + intercept);
-        move(new Point(x3, y3), v, 100);
-    }
-
-    public void newMove(Path path){
-
-    }
-
 }

@@ -1,170 +1,31 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Bounce {
-    public static int[] bounceCheck(int lilUzi, int horizontal) {
-        int impactDirection = 0;
-        double[] coords = new double[]{horizontal, lilUzi};
-        Point ballPosition = new Point(horizontal, lilUzi);
-        double[] isTouching = isTouching(new Shape(null, coords, 25, true), Main.obstacles);
-
-        int[][] points = new int[][]{
-                new int[]{
-                        (int) isTouching[0], (int) isTouching[1]
-                },
-                new int[]{
-                        (int) isTouching[2], (int) isTouching[3]
-                }
-        };
-        if (points[0][0] != -1) {
-            int changeY = (points[1][1] - points[0][1]);
-            int changeX = (points[1][0] - points[0][0]);
-            int newX, newY;
-            if (changeX == 0) {
-                newX = -1 * horizontal;
-                newY = lilUzi;
-                if(newX > 0)
-                    impactDirection = 0; //Right
-                else if(newX < 0)
-                    impactDirection = 1; //Left
-            } else if (changeY == 0) {
-                newX = horizontal;
-                newY = -1 * lilUzi;
-                if(newY > 0)
-                    impactDirection = 2;
-                else if(newY < 0)
-                    impactDirection = 3;
-            } else {
-                //Slope of final trajectory = wallSlope/(initialDirection/wallSlope);
-                //this won't happen because no diagonal obstacles
-                int diffY = changeX * lilUzi;
-                int diffX = changeY * horizontal;
-
-                newY = diffX * ballPosition.y;
-                newX = diffY * ballPosition.x;
-                impactDirection = 0;
-            }
-            int[] arr = new int[5];
-            arr[0] = newX;
-            arr[1] = -newY;
-            arr[2] = ballPosition.y - (ballPosition.x * newY / newX);
-            arr[3] = impactDirection;
-            String verbal;
-            if(impactDirection == 2)
-            {
-                if(newX < 0)
-                    impactDirection = 2; //Up left
-                if(newX > 0)
-                    impactDirection = 3; //Up right
-            }
-            else if(impactDirection == 3)
-            {
-                if(newX < 0)
-                    impactDirection = 4; //Down left
-                if(newX > 0)
-                    impactDirection = 5; //Down right
-            }
-           /* if(arr[0] > 0 && arr[1] > 0)
-                verbal = "1downRight";
-            else if(arr[0] > 0 && arr[1] < 0)
-                verbal = "2upRight";
-            else if(arr[0] < 0 && arr[1] > 0)
-                verbal = "3downLeft";
-            else if(arr[0] < 0 && arr[1] < 0)
-                verbal = "4upLeft";
-            else
-                verbal = "5straightUpOrStraightDown";
-            int direction = Integer.parseInt(verbal.substring(0,1));
-            arr[4] = direction; */
-            arr[3] = impactDirection;
-            System.out.println(Arrays.toString(arr));
-            return arr;
+    public static BouncePath bounce(double m, double b, int direction, int ballCurrX, int ballCurrY){
+        Shape[] obstacles = Main.obstacles;
+        ArrayList<Integer> arrX = new ArrayList<>();
+        for (int i = 1; i < obstacles.length; i++) {
+            Shape shape = obstacles[i];
+            double[][] coors = shape.coors;
+            double topX = ((coors[1][1] - b) / m);
+            double botX = ((coors[0][1] - b) / m);
+            double leftY = m * coors[0][0] + b;
+            double rightY = m * coors[1][0] + b;
+            if (topX >= coors[0][0] && topX <= coors[1][0]) arrX.add((int) topX);
+            if (botX >= coors[0][0] && botX <= coors[1][0]) arrX.add((int) botX);
+            if (leftY >= coors[0][1] && leftY <= coors[1][1]) arrX.add((int) coors[0][0]);
+            if (rightY >= coors[0][1] && rightY <= coors[1][1]) arrX.add((int) coors[1][0]);
         }
-        return new int[]{-1};
-    }
-    public double angleToSlope(double angle)
-    {
-        if(angle < 0 || angle > 360)
-            return 0;
-        double angleInRadians = Math.toRadians(angle);
-        return Math.tan(angleInRadians);
-    }
-
-    public static double[][] ballHittingObstacle(Shape circle, Shape[] Obstacles) {
-        double[][] pointsConnectingWallOfContact = new double[2][2];
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                pointsConnectingWallOfContact[i][j] = -1;
-            }
+        Collections.sort(arrX);
+        if(arrX.size()>0) if (direction == 1) {
+            Point point = new Point(arrX.get(0), (int) (m * (arrX.get(0)) + b));
+            return new BouncePath(-1.0 * m, point.y - m * point.x, point, 0, true);
+        } else {
+            Point point = new Point(arrX.get(arrX.size() - 1), (int) (m * (arrX.get(arrX.size() - 1) + b)));
+            return new BouncePath(-1.0 * m, point.y - m * point.x, point, 1, true);
         }
-        int radius = 25;
-        double[] center = circle.center;
-        double x = center[0];
-        double y = center[1];
-        for (Shape obs : Obstacles) {
-            double[][] coors = obs.coors;
-            if (radius + x > coors[0][0] && radius + x < coors[1][0] && y > coors[0][1] && y < coors[1][1]) {
-                pointsConnectingWallOfContact[0] = coors[0];
-                pointsConnectingWallOfContact[1][0] = coors[0][0];
-                pointsConnectingWallOfContact[1][1] = coors[1][1];
-            } else if (x - radius > coors[0][0] && x - radius < coors[1][0] && y > coors[0][1] && y < coors[1][1]) {
-                pointsConnectingWallOfContact[0][0] = coors[1][0];
-                pointsConnectingWallOfContact[0][1] = coors[0][1];
-                pointsConnectingWallOfContact[1] = coors[1];
-            } else if (x > coors[0][0] && x < coors[1][0] && y + radius > coors[0][1] && y + radius < coors[1][1]) {
-                pointsConnectingWallOfContact[0] = coors[0];
-                pointsConnectingWallOfContact[1][0] = coors[1][0];
-                pointsConnectingWallOfContact[1][1] = coors[0][1];
-            } else if (x > coors[0][0] && x < coors[1][0] && y - radius > coors[0][1] && y - radius < coors[1][1]) {
-                pointsConnectingWallOfContact[0][0] = coors[0][0];
-                pointsConnectingWallOfContact[0][1] = coors[1][1];
-                pointsConnectingWallOfContact[1] = coors[1];
-            }
-
-        }
-        return pointsConnectingWallOfContact;
-
-    }
-
-    public static double[] isTouching(Shape currCircle, Shape[] obstacles) {
-        int radius = 25;
-        double[] center = currCircle.center;
-        for (int j = 1, obstaclesLength = obstacles.length; j < obstaclesLength; j++) {
-            Shape obs = obstacles[j];
-            double[][] coors = obs.coors;
-            for (int i = (int) coors[0][1]; i < coors[1][1]; i++) {
-                if (Math.pow((coors[0][0] - center[0]), 2) + Math.pow((i - center[1]), 2) == Math.pow(radius, 2)) {
-                    return new double[]{coors[0][0], coors[0][1], coors[0][0], coors[1][1]};
-                }
-            }
-            for (int i = (int) coors[0][1]; i < coors[1][1]; i++) {
-                if (Math.pow((coors[1][0] - center[0]), 2) + Math.pow((i - center[1]), 2) == Math.pow(radius, 2)) {
-                    return new double[]{coors[1][0], coors[0][1], coors[1][0], coors[1][1]};
-                }
-            }
-            for (int i = (int) coors[1][0]; i < coors[0][0]; i++) {
-                if (Math.pow((i - center[0]), 2) + Math.pow(coors[0][1], 2) == Math.pow(radius, 2)) {
-                    return new double[]{coors[0][0], coors[1][1], coors[1][0], coors[1][1]};
-                }
-            }
-            for (int i = (int) coors[1][0]; i < coors[0][0]; i++) {
-                if (Math.pow((i - center[0]), 2) + Math.pow(coors[1][1], 2) == Math.pow(radius, 2)) {
-                    return new double[]{coors[0][0], coors[0][0], coors[1][0], coors[0][0]};
-                }
-            }
-        }
-        if ((center[0] + 25 > 1920)) {
-            return new double[]{1920, 1080, 1920, 0};
-        }
-        if ((center[0] - 25 < 0)) {
-            return new double[]{0, 0, 0, 1080};
-        }
-        if ((center[1] + 25 > 1080)) {
-            return new double[]{0, 1080, 1920, 1080};
-        }
-        if ((center[1] - 25 < 0)) {
-            return new double[]{0, 0, 1920, 0};
-        }
-        return new double[]{-1, -1, -1, -1};
+        return new BouncePath(0,0,new Point(0,0),0,false);
     }
 }
-//return as x1,y1,x2,y2 @Wal

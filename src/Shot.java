@@ -7,7 +7,7 @@ public class Shot {
     int power;
     final int poweri;
 
-    public Shot(Point destination, int power, double angle) {
+    public Shot(Point destination, int power) {
         this.destination = destination;
         this.power = power;
         this.poweri = power;
@@ -50,7 +50,7 @@ public class Shot {
             }
 
             //todo replace "new BouncePath..." with @suryaa method and assign variables to actual values
-            BouncePath bouncePath = NewBounce.bounce(m, b, direction, endingPoint().x, endingPoint().y);
+            BouncePath bouncePath = Bounce.bounce(m, b, direction, endingPoint().x, endingPoint().y);
 
             double intersectToEnd = bouncePath.intersection.distance(endingPoint());
             if (bouncePath.bounce && intersectToEnd <= power){

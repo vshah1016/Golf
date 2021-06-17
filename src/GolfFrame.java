@@ -1,12 +1,14 @@
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class GolfFrame extends JPanel {
+public class GolfFrame extends JPanel implements KeyListener, ActionListener {
     final GolfBall golfBall;
     final Shape[] obstacles;
-    final boolean moving;
+    private boolean moving;
+
+    private Shooter line;
     public GolfFrame(GolfBall golfBall, Shape[] obstacles, boolean moving) {
         this.golfBall = golfBall;
         this.obstacles = obstacles;
@@ -15,10 +17,23 @@ public class GolfFrame extends JPanel {
         setBackground(new Color(31, 163, 71));
         setFocusable(true);
         setVisible(true);
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                keyboardPress(e);
+            }
+        });
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (!moving){
+            g.setColor(Color.orange);
+            Point currentLocation = Main.locations.currentLocation();
+            if(line == null) line = new Shooter(currentLocation);
+            Point lineEndpoint = line.endPoint();
+            g.drawLine(currentLocation.x + 13, currentLocation.y + 13, lineEndpoint.x + 13, lineEndpoint.y + 13);
+        }
         golfBall.draw(g);
         Shape hole = obstacles[0];
         g.setColor(Color.black);
@@ -30,5 +45,77 @@ public class GolfFrame extends JPanel {
             g.fillPolygon(xCoords, yCoords, 4);
         }
 
+
+
+    }
+
+    public void shoot(){
+        moving = false;
+        line = new Shooter(Main.locations.currentLocation());
+    }
+
+    public void move(){
+        moving = true;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    public void keyboardPress(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch (code){
+            case KeyEvent.VK_LEFT -> {
+                line.angleLeft();
+                repaint();
+            }
+            case KeyEvent.VK_RIGHT -> {
+                line.angleRight();
+                repaint();
+            }
+            case KeyEvent.VK_UP -> {
+                line.increasePower();
+                repaint();
+            }
+            case KeyEvent.VK_DOWN -> {
+                line.decreasePower();
+                repaint();
+            }
+            case KeyEvent.VK_ENTER -> {
+                Point currentLocation = Main.locations.currentLocation();
+                Point endpoint = line.endPoint();
+                double m = (endpoint.y * 1.0 - currentLocation.y) / (endpoint.x - currentLocation.x);
+                double b = endpoint.y - m * endpoint.x;
+                int x = currentLocation.x + (endpoint.x - currentLocation.x) * 5;
+                Point newPoint = new Point(x, (int) (m * x + b));
+                Shot shot = new Shot(newPoint, line.power * 5);
+                this.move();
+                for (Path path : shot.paths){
+                    try {
+                        golfBall.move(path.endingPoint, path.vi, path.vf);
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                }
+                this.shoot();
+            }
+            default -> {}
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        repaint();
     }
 }
