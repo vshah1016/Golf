@@ -35,7 +35,7 @@ public class Shot {
 
     public void calculate(double m, double b, int direction){
         Point currentLocation = locations.currentLocation();
-        while(power >= 0){
+        while(power > 0){
             Path newPath;
             Point startingPoint, endingPoint = null;
             int vi, vf;
@@ -56,23 +56,24 @@ public class Shot {
             if (bouncePath.bounce && intersectToEnd <= power){
                 endingPoint = bouncePath.intersection;
                 power -= intersectToEnd;
-                vf = (int) (30.0 * (power / poweri) + 0.5);
+                vf = (int) (30.0 * (power * 1.0 / poweri) + 0.5);
             } else {
-                switch (bouncePath.direction){
+                switch (direction){
                     case 0 -> {
-                        Point relativeDestination = new Point(0, (int) bouncePath.b);
-                        int x3 = (int) Math.ceil((startingPoint.x - Math.ceil((power * (startingPoint.x - relativeDestination.x) / startingPoint.distance(relativeDestination)))));
-                        int y3 = (int) (x3 * bouncePath.m + bouncePath.b);
+                        Point relativeDestination = new Point(0, (int) b);
+                        int x3 = (int) Math.ceil(startingPoint.x - Math.ceil(power * (startingPoint.x - relativeDestination.x) / startingPoint.distance(relativeDestination)));
+                        int y3 = (int) (x3 * m + b);
                         endingPoint = new Point(x3, y3);
                     }
                     case 1 -> {
-                        Point relativeDestination = new Point(1920, (int) (1920 * bouncePath.m + bouncePath.b));
-                        int x3 = (int) Math.ceil((startingPoint.x - Math.ceil((power * (startingPoint.x - relativeDestination.x) / startingPoint.distance(relativeDestination)))));
-                        int y3 = (int) (x3 * bouncePath.m + bouncePath.b);
+                        Point relativeDestination = new Point(1920, (int) (1920 * m + b));
+                        int x3 = (int) Math.ceil(startingPoint.x - Math.ceil(power * (startingPoint.x - relativeDestination.x) / startingPoint.distance(relativeDestination)));
+                        int y3 = (int) (x3 * m + b);
                         endingPoint = new Point(x3, y3);
                     }
                 }
                 vf = 0;
+                power = 0;
             }
             m = bouncePath.m;
             b = bouncePath.b;
