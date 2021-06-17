@@ -24,8 +24,9 @@ public class GolfBall {
             int y3 = (int) Math.ceil((m * x3 + b));
             Point point3 = new Point(x3, y3);
             locations.newLocations(point3);
-            Thread.sleep(10);
+            Main.golfCourse.repaint();
             Main.jFrame.repaint();
+            Thread.sleep(10);
             v = (int) ((vi * (d / d1))) + vf;
             if (v == 1 || v == 0) v = 2;
             if ((int) d < 2) v = vf;

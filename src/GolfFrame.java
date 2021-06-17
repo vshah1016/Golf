@@ -20,7 +20,11 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                keyboardPress(e);
+                try {
+                    keyboardPress(e);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
             }
         });
     }
@@ -68,7 +72,7 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
 
     }
 
-    public void keyboardPress(KeyEvent e) {
+    public void keyboardPress(KeyEvent e) throws InterruptedException {
         int code = e.getKeyCode();
         switch (code){
             case KeyEvent.VK_LEFT -> {
@@ -96,14 +100,13 @@ public class GolfFrame extends JPanel implements KeyListener, ActionListener {
                 Point newPoint = new Point(x, (int) (m * x + b));
                 Shot shot = new Shot(newPoint, line.power * 5);
                 this.move();
+                repaint();
                 for (Path path : shot.paths){
-                    try {
-                        golfBall.move(path.endingPoint, path.vi, path.vf);
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
+                    golfBall.move(path.endingPoint, path.vi, path.vf);
                 }
+                Main.locations.newLocations(shot.endingPoint());
                 this.shoot();
+                repaint();
             }
             default -> {}
         }
